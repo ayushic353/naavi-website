@@ -1,0 +1,202 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Design Tokens ──────────────────────────────────────── */
+:root {
+  --obsidian: #0a0a0a;
+  --charcoal: #141414;
+  --graphite: #1e1e1e;
+  --iron: #2a2a2a;
+  --ash: #3d3d3d;
+  --mist: #6b6b6b;
+  --silver: #a8a8a8;
+  --pearl: #e8e4de;
+  --gold: #c9a96e;
+  --gold-light: #e2c99a;
+  --ember: #c45c3a;
+  --rouge: #8b2635;
+}
+
+/* ── Base ──────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Jost', sans-serif;
+  background-color: var(--obsidian);
+  color: var(--pearl);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--charcoal); }
+::-webkit-scrollbar-thumb { background: var(--ash); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+/* Selection */
+::selection { background: var(--gold); color: var(--obsidian); }
+
+/* ── Typography helpers ─────────────────────────────────── */
+.font-display { font-family: 'Cormorant Garamond', serif; }
+.font-mono-custom { font-family: 'DM Mono', monospace; }
+
+/* ── Gold shimmer line ──────────────────────────────────── */
+.gold-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* ── Underline animation ────────────────────────────────── */
+.underline-gold {
+  position: relative;
+}
+.underline-gold::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.35s ease;
+}
+.underline-gold:hover::after { width: 100%; }
+
+/* ── Page entrance animation ────────────────────────────── */
+.page-enter { animation: fadeUp 0.6s ease forwards; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Stagger delays ─────────────────────────────────────── */
+.s1 { animation-delay: 0.1s; opacity: 0; animation-fill-mode: forwards; }
+.s2 { animation-delay: 0.2s; opacity: 0; animation-fill-mode: forwards; }
+.s3 { animation-delay: 0.3s; opacity: 0; animation-fill-mode: forwards; }
+.s4 { animation-delay: 0.4s; opacity: 0; animation-fill-mode: forwards; }
+.s5 { animation-delay: 0.5s; opacity: 0; animation-fill-mode: forwards; }
+
+/* ── Inputs ─────────────────────────────────────────────── */
+.naavi-input {
+  width: 100%;
+  background: var(--graphite);
+  border: 1px solid var(--ash);
+  color: var(--pearl);
+  padding: 0.75rem 1rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.25s;
+}
+.naavi-input::placeholder { color: var(--mist); }
+.naavi-input:focus { border-color: var(--gold); }
+
+/* ── Buttons ────────────────────────────────────────────── */
+.btn-gold {
+  background: var(--gold);
+  color: var(--obsidian);
+  padding: 0.8rem 2rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.25s, transform 0.15s;
+}
+.btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
+.btn-gold:active { transform: translateY(0); }
+.btn-gold:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+.btn-outline-gold {
+  background: transparent;
+  color: var(--gold);
+  padding: 0.8rem 2rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid var(--gold);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.25s, color 0.25s;
+}
+.btn-outline-gold:hover { background: var(--gold); color: var(--obsidian); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--pearl);
+  padding: 0.75rem 1.5rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid var(--ash);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: border-color 0.25s, color 0.25s;
+}
+.btn-ghost:hover { border-color: var(--pearl); }
+
+/* ── Product card ───────────────────────────────────────── */
+.product-card {
+  transition: transform 0.35s ease;
+}
+.product-card:hover { transform: translateY(-6px); }
+
+/* ── Skeleton loader ────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(90deg, var(--graphite) 25%, var(--iron) 50%, var(--graphite) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Badge ──────────────────────────────────────────────── */
+.naavi-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  display: inline-block;
+}
+
+/* ── Gold divider text ──────────────────────────────────── */
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ── Noise overlay ──────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.35;
+}
